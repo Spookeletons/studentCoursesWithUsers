@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const courseController = require('../controllers/courseController.js');
 const studentController = require('../controllers/studentController.js');
-const userController = require('../controllers/userController');
+const userController = require('../controllers/userController.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -33,4 +33,9 @@ router.get('/courses/:courseId/removeStudent/:studentId', courseController.remov
 
 router.get('/register-student', userController.renderStudentRegistrationForm);
 router.post('/register-student', userController.registerStudent);
+router.get('/register-staff', userController.renderStaffRegistrationForm);
+router.post('/register-staff', userController.registerStaff);
+
+router.get('/login', userController.renderLoginForm);
+router.post('/login', userController.login);
 module.exports = router;
