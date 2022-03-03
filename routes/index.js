@@ -4,9 +4,15 @@ const courseController = require('../controllers/courseController.js');
 const studentController = require('../controllers/studentController.js');
 const userController = require('../controllers/userController.js');
 
-/* GET home page. */
+function redirectGuests(req,res,next){
+  if(!req.user){
+    res.redirect('/login');
+    return
+  }
+  next();
+};
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.redirect('/courses');
 });
 
 router.get('/courses', courseController.viewAll);
@@ -22,8 +28,6 @@ router.get('/students', studentController.viewAll);
 router.get('/students/profile/:id', studentController.viewProfile);
 router.get('/students/edit/:id', studentController.renderEditForm);
 router.post('/students/edit/:id', studentController.updateStudent);
-router.get('/students/add', studentController.renderAddForm);
-router.post('/students/add', studentController.addStudent);
 router.get('/students/delete/:id', studentController.deleteStudent);
 
 router.post('/students/:studentId/enroll/', studentController.enrollStudent);
@@ -38,4 +42,6 @@ router.post('/register-staff', userController.registerStaff);
 
 router.get('/login', userController.renderLoginForm);
 router.post('/login', userController.login);
+router.get('/logout', userController.logout);
+
 module.exports = router;
