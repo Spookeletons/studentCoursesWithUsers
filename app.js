@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret:'290rv2m0vucqrm',
   resave:true,
-  saveUnitialized:false,
+  saveUninitialized:false,
   cookie: {
     secure:false,
     maxAge: 6*60*60*1000

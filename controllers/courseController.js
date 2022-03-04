@@ -1,4 +1,4 @@
-const {Course, Student, StudentCourses} = require('../models')
+const {User, Course, Student, StudentCourses} = require('../models')
 const departments = ['Math', 'English', 'Music', 'Art', 'PE', 'World Languages', 'Social Studies', 'Science'].sort();
 
 //view all
@@ -23,7 +23,7 @@ module.exports.viewProfile= async function(req,res){
 }
 
 //render add form
-module.exports.renderAddForm =  function(req, res){
+module.exports.renderAddForm = function(req, res){
     if(!req.user.can('add course')){
         res.redirect('/');
         return
@@ -106,9 +106,9 @@ module.exports.enrollStudent = async function(req, res){
     }
     await StudentCourses.create({
         student_id: req.body.student,
-        course_id: req.params.courseId
+        course_id: req.params.course_id
     });
-    res.redirect(`/courses/profile/${req.params.courseId}`)
+    res.redirect(`/courses/profile/${req.params.course_id}`)
 }
 
 //remove a student from a course

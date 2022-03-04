@@ -1,4 +1,4 @@
-const {Student, Course, StudentCourses} = require('../models')
+const {User, Student, Course, StudentCourses} = require('../models')
 
 //view all
 module.exports.viewAll = async function (req, res) {

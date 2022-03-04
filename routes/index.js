@@ -15,30 +15,30 @@ router.get('/', function(req, res, next) {
   res.redirect('/courses');
 });
 
-router.get('/courses', courseController.viewAll);
-router.get('/courses/profile/:id', courseController.viewProfile);
-router.get('/courses/edit/:id', courseController.renderEditForm);
-router.post('/courses/edit/:id', courseController.updateCourse);
-router.get('/courses/add', courseController.renderAddForm);
-router.post('/courses/add', courseController.addCourse);
-router.get('/courses/delete/:id', courseController.deleteCourse);
+router.get('/courses', redirectGuests, courseController.viewAll);
+router.get('/courses/profile/:id', redirectGuests, courseController.viewProfile);
+router.get('/courses/edit/:id', redirectGuests, courseController.renderEditForm);
+router.post('/courses/edit/:id', redirectGuests, courseController.updateCourse);
+router.get('/courses/add', redirectGuests, courseController.renderAddForm);
+router.post('/courses/add', redirectGuests, courseController.addCourse);
+router.get('/courses/delete/:id', redirectGuests, courseController.deleteCourse);
 
 
-router.get('/students', studentController.viewAll);
-router.get('/students/profile/:id', studentController.viewProfile);
-router.get('/students/edit/:id', studentController.renderEditForm);
-router.post('/students/edit/:id', studentController.updateStudent);
-router.get('/students/delete/:id', studentController.deleteStudent);
+router.get('/students', redirectGuests, studentController.viewAll);
+router.get('/students/profile/:id', redirectGuests, studentController.viewProfile);
+router.get('/students/edit/:id', redirectGuests, studentController.renderEditForm);
+router.post('/students/edit/:id', redirectGuests, studentController.updateStudent);
+router.get('/students/delete/:id', redirectGuests, studentController.deleteStudent);
 
-router.post('/students/:studentId/enroll/', studentController.enrollStudent);
-router.get('/students/:studentId/removeCourse/:courseId', studentController.removeCourse);
-router.post('/courses/:courseId/enroll', courseController.enrollStudent);
-router.get('/courses/:courseId/removeStudent/:studentId', courseController.removeStudent);
+router.post('/students/:studentId/enroll/', redirectGuests, studentController.enrollStudent);
+router.get('/students/:studentId/removeCourse/:courseId', redirectGuests, studentController.removeCourse);
+router.post('/courses/:courseId/enroll', redirectGuests, courseController.enrollStudent);
+router.get('/courses/:courseId/removeStudent/:studentId', redirectGuests, courseController.removeStudent);
 
-router.get('/register-student', userController.renderStudentRegistrationForm);
-router.post('/register-student', userController.registerStudent);
-router.get('/register-staff', userController.renderStaffRegistrationForm);
-router.post('/register-staff', userController.registerStaff);
+router.get('/register-student', redirectGuests, userController.renderStudentRegistrationForm);
+router.post('/register-student', redirectGuests, userController.registerStudent);
+router.get('/register-staff', redirectGuests, userController.renderStaffRegistrationForm);
+router.post('/register-staff', redirectGuests, userController.registerStaff);
 
 router.get('/login', userController.renderLoginForm);
 router.post('/login', userController.login);
